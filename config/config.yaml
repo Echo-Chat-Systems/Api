@@ -1,0 +1,38 @@
+# Default config file for the echo server
+default: &default
+    server:
+        name: echo-api
+        host: echo-api.dafox.au
+    logging:
+
+    database:
+        name: echo
+        user: echo
+        host: server
+        port: 5432
+
+    auth:
+        key_expires: 604800  # 1 week
+        key_size: 8192  # Big key size for good message security
+        fail_wait_time: 10  # 10 seconds
+        fail_max_attempts: 4  # 4 attempts
+        fail_lock_time: 600  # 10 minutes
+        admin_auth_timeout: 1800  # 30 minutes
+
+    user_security:
+        # Passwords for users
+        password_minimum_length: 10
+        password_maximum_length: 1048576  # 1 MB assuming each character is 1 byte
+        password_require_uppercase: 2
+        password_require_lowercase: 2
+        password_require_number: 2
+        password_require_special_character: 2
+        verification_expires_days: 0
+        verification_expires_hours: 2
+
+    email:
+        user: echo-api@dafox.au
+        host: smtp.zoho.com.au
+        port: 587
+development:
+    <<: *default
