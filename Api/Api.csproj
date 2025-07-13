@@ -17,7 +17,7 @@
         <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.0-preview.5.25277.114"/>
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.0-preview.5.25277.114"/>
 
-        <PackageReference Include="EchoChat.Core" Version="0.0.1-dev-00001"/>
+        <PackageReference Include="EchoChat.Core" Version="0.0.1-dev-00014"/>
 
     </ItemGroup>
 

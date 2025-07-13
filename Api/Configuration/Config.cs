@@ -30,13 +30,14 @@ public class Api(int connectionSlots)
 	public int ConnectionSlots { get; } = connectionSlots;
 }
 
-
-public class Timeouts(TimeSpan clientsCleanup, TimeSpan sessionExpiration)
+public class Timeouts(TimeSpan certificatesExpiration,TimeSpan clientsCleanup, TimeSpan stateStorageExpiration, TimeSpan stateStorageCleanup, TimeSpan sessionExpiration)
 {
+	public TimeSpan CertificatesExpiration { get; } = certificatesExpiration;
 	public TimeSpan ClientsCleanup { get; } = clientsCleanup;
+	public TimeSpan StateStorageExpiration { get; } = stateStorageExpiration;
+	public TimeSpan StateStorageCleanup { get; } = stateStorageCleanup;
 	public TimeSpan SessionExpiration { get; } = sessionExpiration;
 }
-
 
 public class Config
 {
@@ -71,7 +72,10 @@ public class Config
 		);
 
 		Timeouts = new Timeouts(
+			TimeSpan.Parse(configuration["Timeouts:CertificatesExpiration"] ?? throw new MissingFieldException("Timeouts:CertificatesExpiration")),
 			TimeSpan.Parse(configuration["Timeouts:ClientsCleanup"] ?? throw new MissingFieldException("Timeouts:ClientsCleanup")),
+			TimeSpan.Parse(configuration["Timeouts:StateStorageExpiration"] ?? throw new MissingFieldException("Timeouts:StateStorageExpiration")),
+			TimeSpan.Parse(configuration["Timeouts:StateStorageCleanup"] ?? throw new MissingFieldException("Timeouts:StateStorageCleanup")),
 			TimeSpan.Parse(configuration["Timeouts:SessionExpiration"] ?? throw new MissingFieldException("Timeouts:SessionExpiration"))
 		);
 
